@@ -1,0 +1,26 @@
+{
+    "name": "alboradait/laravel-progress",
+    "description": "Progress tracking tools for Laravel",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Alboradait\\LaravelProgress\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Alboradait\\LaravelProgress\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sergio Antonio Martín Luque",
+            "email": "sergio@alboradait.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "orchestra/testbench": "^10.1"
+    }
+}
