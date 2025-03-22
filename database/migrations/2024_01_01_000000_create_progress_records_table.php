@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('progress_records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->morphs('progressable'); // progressable_id & progressable_type
+            $table->morphs('progressable');
             $table->float('percentage')->default(0);
             $table->enum('status', ['in_progress', 'completed', 'abandoned', 'skipped'])->default('in_progress')->index();
             $table->json('meta')->nullable();
