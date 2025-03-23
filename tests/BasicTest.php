@@ -1,6 +1,6 @@
 <?php
 
-namespace Alboradait\LaravelProgress\Tests;
+namespace AlboradaIT\LaravelProgress\Tests;
 
 class BasicTest extends TestCase
 {

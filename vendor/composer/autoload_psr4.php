@@ -90,6 +90,6 @@ return array(
     'Carbon\\Doctrine\\' => array($vendorDir . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
-    'Alboradait\\LaravelProgress\\Tests\\' => array($baseDir . '/tests'),
-    'Alboradait\\LaravelProgress\\' => array($baseDir . '/src'),
+    'AlboradaIT\\LaravelProgress\\Tests\\' => array($baseDir . '/tests'),
+    'AlboradaIT\\LaravelProgress\\' => array($baseDir . '/src'),
 );

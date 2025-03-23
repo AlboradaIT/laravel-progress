@@ -184,8 +184,8 @@ class ComposerStaticInitcbbac96ff7830c46003ec9e57137faf2
         ),
         'A' => 
         array (
-            'Alboradait\\LaravelProgress\\Tests\\' => 33,
-            'Alboradait\\LaravelProgress\\' => 27,
+            'AlboradaIT\\LaravelProgress\\Tests\\' => 33,
+            'AlboradaIT\\LaravelProgress\\' => 27,
         ),
     );
 
@@ -530,11 +530,11 @@ class ComposerStaticInitcbbac96ff7830c46003ec9e57137faf2
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
-        'Alboradait\\LaravelProgress\\Tests\\' => 
+        'AlboradaIT\\LaravelProgress\\Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
         ),
-        'Alboradait\\LaravelProgress\\' => 
+        'AlboradaIT\\LaravelProgress\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

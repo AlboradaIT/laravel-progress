@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->morphs('progressable');
             $table->float('percentage')->default(0);
-            $table->enum('status', ['in_progress', 'completed', 'abandoned', 'skipped'])->default('in_progress')->index();
+            $table->enum('status', ['in_progress', 'completed', 'abandoned'])->default('in_progress')->index();
             $table->json('meta')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();

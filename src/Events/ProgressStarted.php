@@ -7,7 +7,7 @@ use AlboradaIT\LaravelProgress\Models\ProgressRecord;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ProgressUpdated
+class ProgressStarted
 {
     use Dispatchable, SerializesModels;
 

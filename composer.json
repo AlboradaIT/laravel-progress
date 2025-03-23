@@ -4,12 +4,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Alboradait\\LaravelProgress\\": "src/"
+            "AlboradaIT\\LaravelProgress\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Alboradait\\LaravelProgress\\Tests\\": "tests/"
+            "AlboradaIT\\LaravelProgress\\Tests\\": "tests/"
         }
     },
     "authors": [
