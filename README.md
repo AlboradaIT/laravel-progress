@@ -203,4 +203,3 @@ vendor/bin/phpunit
 ## License
 
 MIT License. Copyright (c) Alborada IT.
-
