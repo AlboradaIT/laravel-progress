@@ -103,11 +103,11 @@ trait TracksProgress
 
     protected function determineStatus(User $user): string
     {
-        if ( $this->isCompleted($user) ) {
+        if ( $this->determineCompleted($user) ) {
             return ProgressRecord::STATUS_COMPLETED;
         }
 
-        if ( $this->isAbandoned($user) ) {
+        if ( $this->determineAbandoned($user) ) {
             return ProgressRecord::STATUS_ABANDONED;
         }
 
@@ -137,12 +137,12 @@ trait TracksProgress
         return array_sum(array_map(fn ($step) => $this->getWeightForStep($step), $this->getCompletedSteps($user)));
     }
 
-    protected function isCompleted(User $user): bool
+    protected function determineCompleted(User $user): bool
     {
         return $this->calculateProgress($user) >= 100;
     }
 
-    protected function isAbandoned(User $user): bool
+    protected function determineAbandoned(User $user): bool
     {
         $record = $this->progressForUser($user);
 
@@ -153,5 +153,18 @@ trait TracksProgress
         $timeout = config('progress.abandon_after');
 
         return $record->updated_at->lt(now()->subSeconds($timeout));
+    }
+
+    public function isCompleted(User $user): bool
+    {
+        return $this->progressForUser($user)?->status === ProgressRecord::STATUS_COMPLETED;
+    }
+    public function isInProgress(User $user): bool
+    {
+        return $this->progressForUser($user)?->status === ProgressRecord::STATUS_IN_PROGRESS;
+    }
+    public function isAbandoned(User $user): bool
+    {
+        return $this->progressForUser($user)?->status === ProgressRecord::STATUS_ABANDONED;
     }
 }

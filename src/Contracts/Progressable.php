@@ -13,4 +13,7 @@ interface Progressable
     public function getCompletedSteps(User $user): array;
     public function updateUserProgress(User $user): ProgressRecord;
     public function updateProgresses(): void;
+    public function isCompleted(User $user): bool;
+    public function isAbandoned(User $user): bool;
+    public function isInProgress(User $user): bool;
 }
