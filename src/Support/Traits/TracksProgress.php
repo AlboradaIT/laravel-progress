@@ -81,7 +81,19 @@ trait TracksProgress
             $q->where('user_id', $user->id)->where('percentage', '>=', 100)
         );
     }
+    public function scopeWithAnyStatusForUser($query, User $user, array $statuses)
+    {
+        $query->whereHas('progresses', function ($q) use ($user, $statuses) {
+            $q->where('user_id', $user->id)
+                ->whereIn('progress_records.status', $statuses);
+        });
 
+        if ( in_array('pending', $statuses) ) {
+            $query->orWhereDoesntHave('progresses', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        }
+    }
     public function scopeWithProgressForUser($query, User $user)
     {
         return $query->whereHas('progresses', fn ($q) => $q->where('user_id', $user->id));
