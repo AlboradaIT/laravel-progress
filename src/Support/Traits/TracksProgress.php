@@ -20,7 +20,7 @@ trait TracksProgress
 
     public function userProgress()
     {
-        return $this->hasOne(ProgressRecord::class);
+        return $this->morphOne(ProgressRecord::class);
     }
 
     public function scopeWithUserProgress($query, $userId = null)
