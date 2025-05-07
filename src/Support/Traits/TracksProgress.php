@@ -18,6 +18,21 @@ trait TracksProgress
         return $this->morphMany(ProgressRecord::class, 'progressable');
     }
 
+    public function userProgress()
+    {
+        return $this->hasOne(ProgressRecord::class);
+    }
+
+    public function scopeWithUserProgress($query, $userId = null)
+    {
+        $userId ??= auth()->id();
+
+        return $query->with([
+            'userProgress' => fn ($q) => $q->where('user_id', $userId)
+        ]);
+    } 
+
+
     public function progressForUser(User $user): ?ProgressRecord
     {
         return $this->progressRecords()->where('user_id', $user->id)->first();
