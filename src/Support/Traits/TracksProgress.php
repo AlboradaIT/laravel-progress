@@ -20,7 +20,8 @@ trait TracksProgress
 
     public function userProgress()
     {
-        return $this->morphOne(ProgressRecord::class);
+        return $this->morphOne(ProgressRecord::class, 'progressable')
+            ->where('user_id', auth()->id());
     }
 
     public function scopeWithUserProgress($query, $userId = null)
