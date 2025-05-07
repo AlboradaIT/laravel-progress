@@ -39,7 +39,7 @@ trait TracksProgress
         return $this->progressRecords()->where('user_id', $user->id)->first();
     }
 
-    private function ensureProgressForUser(User $user): ProgressRecord
+    public function ensureProgressForUser(User $user): ProgressRecord
     {
         return $this->progressRecords()->firstOrCreate(['user_id' => $user->id]);
     }
