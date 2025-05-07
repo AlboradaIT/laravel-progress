@@ -99,6 +99,11 @@ trait TracksProgress
         return $query->whereHas('progresses', fn ($q) => $q->where('user_id', $user->id));
     }
 
+    public function scopeWithoutProgressForUser($query, User $user)
+    {
+        return $query->whereDoesntHave('progresses', fn ($q) => $q->where('user_id', $user->id));
+    }
+
     public function scopeInProgressByUser($query, User $user)
     {
         return $query->whereHas('progresses', fn ($q) => 
@@ -178,5 +183,13 @@ trait TracksProgress
     public function isAbandoned(User $user): bool
     {
         return $this->progressForUser($user)?->status === ProgressRecord::STATUS_ABANDONED;
+    }
+
+    
+    public function definedSteps(): array{
+        return [];
+    }
+    public function getCompletedSteps(User $user): array{
+        return [];
     }
 }
