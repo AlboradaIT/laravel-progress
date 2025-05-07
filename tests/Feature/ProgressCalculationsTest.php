@@ -69,8 +69,8 @@ class ProgressCalculationsTest extends TestCase
         $course->updateProgresses();
 
         // Comprobamos que los progresos se han recalculado
-        $progress1 = $course->progresses()->where('user_id', $user1->id)->first();
-        $progress2 = $course->progresses()->where('user_id', $user2->id)->first();
+        $progress1 = $course->progressRecords()->where('user_id', $user1->id)->first();
+        $progress2 = $course->progressRecords()->where('user_id', $user2->id)->first();
 
         $this->assertEquals(100, $progress1->percentage);
         $this->assertEquals(50, $progress2->percentage);

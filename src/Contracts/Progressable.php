@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User;
 
 interface Progressable
 {
-    public function progresses(): MorphMany;
+    public function progressRecords(): MorphMany;
     public function definedSteps(): array;
     public function getCompletedSteps(User $user): array;
     public function updateUserProgress(User $user): ProgressRecord;

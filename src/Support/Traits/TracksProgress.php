@@ -13,19 +13,19 @@ use Illuminate\Foundation\Auth\User;
 
 trait TracksProgress
 {
-    public function progresses(): MorphMany
+    public function progressRecords(): MorphMany
     {
         return $this->morphMany(ProgressRecord::class, 'progressable');
     }
 
     public function progressForUser(User $user): ?ProgressRecord
     {
-        return $this->progresses()->where('user_id', $user->id)->first();
+        return $this->progressRecords()->where('user_id', $user->id)->first();
     }
 
     private function ensureProgressForUser(User $user): ProgressRecord
     {
-        return $this->progresses()->firstOrCreate(['user_id' => $user->id]);
+        return $this->progressRecords()->firstOrCreate(['user_id' => $user->id]);
     }
 
     public function updateUserProgress(User $user): ProgressRecord
@@ -72,48 +72,48 @@ trait TracksProgress
 
     public function updateProgresses(): void
     {
-        $this->progresses()->with('user')->lazy()->each(fn ($record) => $this->updateUserProgress($record->user));
+        $this->progressRecords()->with('user')->lazy()->each(fn ($record) => $this->updateUserProgress($record->user));
     }
 
     public function scopeCompletedByUser($query, User $user)
     {
-        return $query->whereHas('progresses', fn ($q) => 
+        return $query->whereHas('progressRecords', fn ($q) => 
             $q->where('user_id', $user->id)->where('percentage', '>=', 100)
         );
     }
     public function scopeWithAnyStatusForUser($query, User $user, array $statuses)
     {
-        $query->whereHas('progresses', function ($q) use ($user, $statuses) {
+        $query->whereHas('progressRecords', function ($q) use ($user, $statuses) {
             $q->where('user_id', $user->id)
                 ->whereIn('progress_records.status', $statuses);
         });
 
         if ( in_array('pending', $statuses) ) {
-            $query->orWhereDoesntHave('progresses', function ($q) use ($user) {
+            $query->orWhereDoesntHave('progressRecords', function ($q) use ($user) {
                 $q->where('user_id', $user->id);
             });
         }
     }
     public function scopeWithProgressForUser($query, User $user)
     {
-        return $query->whereHas('progresses', fn ($q) => $q->where('user_id', $user->id));
+        return $query->whereHas('progressRecords', fn ($q) => $q->where('user_id', $user->id));
     }
 
     public function scopeWithoutProgressForUser($query, User $user)
     {
-        return $query->whereDoesntHave('progresses', fn ($q) => $q->where('user_id', $user->id));
+        return $query->whereDoesntHave('progressRecords', fn ($q) => $q->where('user_id', $user->id));
     }
 
     public function scopeInProgressByUser($query, User $user)
     {
-        return $query->whereHas('progresses', fn ($q) => 
+        return $query->whereHas('progressRecords', fn ($q) => 
             $q->where('user_id', $user->id)->where('percentage', '<', 100)
         );
     }
 
     public function scopeAbandonedByUser($query, User $user)
     {
-        return $query->whereHas('progresses', fn ($q) => 
+        return $query->whereHas('progressRecords', fn ($q) => 
             $q->where('user_id', $user->id)->where('status', ProgressRecord::STATUS_ABANDONED)
         );
     }

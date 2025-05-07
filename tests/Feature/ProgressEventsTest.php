@@ -195,7 +195,7 @@ class ProgressEventsTest extends TestCase
         $course->updateUserProgress($user);
 
         // Forzamos un updated_at viejo para simular abandono
-        $progress = $course->progresses()->where('user_id', $user->id)->first();
+        $progress = $course->progressRecords()->where('user_id', $user->id)->first();
         $progress->updated_at = now()->subDays(10);
         $progress->save();
 

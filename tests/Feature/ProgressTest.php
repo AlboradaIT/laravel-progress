@@ -129,8 +129,8 @@ class ProgressTest extends TestCase
         $course->updateProgresses();
 
         // Comprobamos que los progresos se han recalculado
-        $progress1 = $course->progresses()->where('user_id', $user1->id)->first();
-        $progress2 = $course->progresses()->where('user_id', $user2->id)->first();
+        $progress1 = $course->progressRecords()->where('user_id', $user1->id)->first();
+        $progress2 = $course->progressRecords()->where('user_id', $user2->id)->first();
 
         $this->assertEquals(100, $progress1->percentage);
         $this->assertEquals(50, $progress2->percentage);
@@ -267,7 +267,7 @@ class ProgressTest extends TestCase
         $course->updateUserProgress($user);
 
         // Forzamos un updated_at viejo para simular abandono
-        $progress = $course->progresses()->where('user_id', $user->id)->first();
+        $progress = $course->progressRecords()->where('user_id', $user->id)->first();
         $progress->updated_at = now()->subDays(10);
         $progress->save();
 
