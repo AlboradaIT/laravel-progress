@@ -52,6 +52,9 @@ trait TracksProgress
 
         $record->percentage = $this->calculateProgress($user);
         $record->status = $this->determineStatus($user);
+        if ($record->isDirty('status') && $record->status === ProgressRecord::STATUS_COMPLETED) {
+            $record->completed_at = now();
+        }
         $record->save();
 
         if ($wasRecentlyCreated && $record->status === ProgressRecord::STATUS_IN_PROGRESS) {
@@ -81,6 +84,7 @@ trait TracksProgress
         $record->percentage = 0;
         $record->status = ProgressRecord::STATUS_IN_PROGRESS;
         $record->meta = null;
+        $record->completed_at = null;
         $record->save();
 
         ProgressRestarted::dispatch($record);
